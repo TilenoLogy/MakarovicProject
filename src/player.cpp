@@ -1,10 +1,13 @@
 #include "player.hpp"
+#include <iostream>
 
 
-
-void Player::update() {
+void Player::update(float dt) {
     if (y + height < 620) {
-        y += 0.5 * gravity;
+        y += dt * gravity * 50;
+        // std::cout << (dt * gravity);
+    } else {
+        air = false;
     }
     // SDL_Event e1;
     // if (SDL_PollEvent(&e1)) {
@@ -24,8 +27,13 @@ void Player::move(int smer, float dt) {
     }
 }
 
-void Player::jump() {
-    y -= 50;
+void Player::jump(float dt) {
+    printf("1");
+    if (!air) {
+
+        y -= dt * gravity * 1500;
+        air = true;
+    }
 }
 
 void Player::draw(SDL_Renderer* renderer) {

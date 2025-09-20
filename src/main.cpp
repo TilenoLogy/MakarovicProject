@@ -29,7 +29,7 @@ int WinMain() {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) running = false;
             if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) running = false;
-            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) player->jump();
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) player->jump(deltaTime);
         }
 
 
@@ -39,7 +39,7 @@ int WinMain() {
 
         SDL_SetRenderDrawColor(renderer, 0, 232, 232, 255);
         SDL_RenderClear(renderer);
-        player->update();
+        player->update(deltaTime);
         player->draw(renderer);
 
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);

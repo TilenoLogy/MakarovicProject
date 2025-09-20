@@ -24,10 +24,11 @@ protected:
     int width = 50;
     int height = 50;
     color col;
+    bool air;
 
 public:
     void move(int smer, float dt);
-    void jump();
-    void update();
+    void jump(float dt);
+    void update(float dt);
     void draw(SDL_Renderer* renderer);
 };
