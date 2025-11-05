@@ -1,34 +1,39 @@
 #pragma once
+
+class Engine;
+
 #include <SDL.h>
-
-
+#include <config.hpp>
 // float velocity = 0;
 // float maxVelocity = 10;
 
 
-
-struct color {
-    int r = 255;
-    int g = 0;
-    int b = 0;
-    int a = 255;
-};
-
-
 class Player {
+    // private:
+    // Engine* engine;
+
 protected:
-    float gravity = 10.0f;
+    float gravity = 700.0f;
     float acceleration = 500.0f;
-    int x = 100;
-    int y = 100;
+    float x = 100;
+    float y = 100;
     int width = 50;
     int height = 50;
-    color col;
+    Color col;
     bool air;
+    float velocity = 0.0f;
+    float velocityx = 0.0f;
+    float maxvelocityx = 250.0f;
+    bool floor = false;
+    float kt = 1.0f; // koeficient trenja
 
 public:
+    // Player(Engine* enginePtr) : engine(enginePtr) {}
+    Engine* engine;
+
     void move(int smer, float dt);
     void jump(float dt);
     void update(float dt);
-    void draw(SDL_Renderer* renderer);
+    void draw(SDL_Renderer* renderer, Color color);
+    void trenje(float dt);
 };

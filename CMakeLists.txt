@@ -16,6 +16,8 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(TheGame ${SOURCES})
 
+target_include_directories(TheGame PRIVATE "./src")
+
 target_link_libraries(TheGame PRIVATE
     SDL2::SDL2
     SDL2_image::SDL2_image
