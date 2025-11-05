@@ -16,25 +16,28 @@ void Player::update(float dt) {
     }
     x += velocityx * dt;
     y += velocity * dt;
-    std::cout << engine->block->x_pos << "\n";
-    if ((x + width >= engine->block->x_pos && x + width < engine->block->x_pos + 5) && (y + height > 400 && y < 450)) {
+
+    if ((x + width >= engine->block->x_pos && x + width < engine->block->x_pos + 5) && (y + height > engine->block->y_pos && y < engine->block->y_pos + 50)) {
         velocityx = 0; // simple collision with blocks
-        x = 200 - width;
+        x = engine->block->x_pos - width;
     }
 
-    if ((x < 250 && x > 245) && (y + height > 400 && y < 450)) {
+    if ((x < engine->block->x_pos + 50 && x > engine->block->x_pos + 45) && (y + height > engine->block->y_pos && y < engine->block->y_pos + 50)) {
         velocityx = 0; // simple collision with blocks
-        x = 250;
+        x = engine->block->x_pos + 50;
     }
 
-    if (x + width > 200 && x < 250 && y < 450 && y > 445) {
+    if (x + width > engine->block->x_pos && x < engine->block->x_pos + 50 && y < engine->block->y_pos + 50 && y > engine->block->y_pos + 45) {
         floor = true;
-        y = 450;
+        y = engine->block->y_pos + 50;
         velocity = 0;
     }
-    // if (engine && engine->block->x == 10) {
-    //      std::cout << "Test";
-    //  }
+    if (engine->block->x_pos < x + width && engine->block->x_pos + 50 > x && engine->block->y_pos < y + height && engine->block->y_pos + 5 > y + height) {
+        floor = true;
+        air = false;
+        y = engine->block->y_pos - height;
+        velocity = 0;
+    }
 }
 void Player::move(int smer, float dt) {
 

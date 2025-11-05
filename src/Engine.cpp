@@ -48,7 +48,7 @@ void Engine::Main() {
     player->update(deltaTime);
     player->draw(renderer, Color{255, 0, 0, 255});
     block->update(deltaTime);
-    block->draw(renderer, Color{0, 255, 0, 255}, 200, 400);
+    block->draw(renderer, Color{0, 255, 0, 255}, 200, 500);
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_Rect r{0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 200};
