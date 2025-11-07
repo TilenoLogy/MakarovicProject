@@ -15,31 +15,69 @@ void Player::update(float dt) {
         air = false;
     }
     x += velocityx * dt;
+    for (int i = 0; i < 10; i++) {
+        Block* blk = engine->blocks[i];
+        if (!blk) continue;
+
+        float px1 = x;
+        float px2 = x + width;
+        float py1 = y;
+        float py2 = y + height;
+        float bx1 = blk->x_pos;
+        float bx2 = blk->x_pos + 50;
+        float by1 = blk->y_pos;
+        float by2 = blk->y_pos + 50;
+
+
+        if (px2 > bx1 && px1 < bx2 && py2 > by1 && py1 < by2) {
+            float overlap_Left = px2 - bx1;
+            float overlap_Right = bx2 - px1;
+
+            if (overlap_Left < overlap_Right) {
+                // Collision from the left
+                // simple collision with blocks
+                x -= overlap_Left;
+            } else {
+                // Collision from the right
+
+                x += overlap_Right;
+            }
+
+            velocityx = 0; // simple collision with blocks
+        }
+    }
+
     y += velocity * dt;
-    for (int i = 0; i < 4; i++) {
 
+    for (int i = 0; i < 10; i++) {
 
+        auto blk = engine->blocks[i];
+        if (!blk) continue;
 
-        if ((x + width >= engine->blocks[i]->x_pos && x + width < engine->blocks[i]->x_pos + 5) && (y + height > engine->blocks[i]->y_pos && y < engine->blocks[i]->y_pos + 50)) {
-            velocityx = 0; // simple collision with blocks
-            x = engine->blocks[i]->x_pos - width;
-        }
+        float px1 = x;
+        float px2 = x + width;
+        float py1 = y;
+        float py2 = y + height;
+        float bx1 = blk->x_pos;
+        float bx2 = blk->x_pos + 50.0f;
+        float by1 = blk->y_pos;
+        float by2 = blk->y_pos + 50.0f;
 
-        if ((x < engine->blocks[i]->x_pos + 50 && x > engine->blocks[i]->x_pos + 45) && (y + height + 2 > engine->blocks[i]->y_pos && y < engine->blocks[i]->y_pos + 50)) {
-            velocityx = 0; // simple collision with blocks
-            x = engine->blocks[i]->x_pos + 50;
-        }
+        if (px2 > bx1 && px1 < bx2 && py2 > by1 && py1 < by2) {
+            float overlapTop = py2 - by1;    // penetration from above (player landed on block)
+            float overlapBottom = by2 - py1; // penetration from below (hit block ceiling)
 
-        if (x + width > engine->blocks[i]->x_pos && x < engine->blocks[i]->x_pos + 50 && y < engine->blocks[i]->y_pos + 50 && y > engine->blocks[i]->y_pos + 45) {
-            floor = true;
-            y = engine->blocks[i]->y_pos + 50;
-            velocity = 0;
-        }
-        if (engine->blocks[i]->x_pos < x + width && engine->blocks[i]->x_pos + 50 > x && engine->blocks[i]->y_pos < y + height && engine->blocks[i]->y_pos + 5 > y + height) {
-            floor = true;
-            air = false;
-            y = engine->blocks[i]->y_pos - height;
-            velocity = 0;
+            if (overlapTop < overlapBottom) {
+                // landed on top of block
+                y -= overlapTop;
+                velocity = 0.0f;
+                floor = true;
+                air = false;
+            } else {
+                // hit block from below
+                y += overlapBottom;
+                velocity = 0.0f;
+            }
         }
     }
 }

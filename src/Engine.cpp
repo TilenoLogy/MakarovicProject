@@ -16,7 +16,7 @@ void Engine::Initialize() {
     running = true;
 
     lastTick = SDL_GetPerformanceCounter();
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 10; i++) {
         blocks[i] = new Block();
         blocks[i]->x_pos = first_x;
         first_x += 50;
@@ -59,7 +59,7 @@ void Engine::Main() {
 
 
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 10; i++) {
 
 
 

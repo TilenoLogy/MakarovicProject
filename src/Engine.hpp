@@ -14,7 +14,7 @@ public:
     void Main();
     void Shutdown();
     bool running;
-    Block* blocks[4];
+    Block* blocks[10];
     Block* block;
     bool first_time = true;
     int first_x = 50;
