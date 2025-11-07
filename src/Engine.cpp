@@ -16,6 +16,12 @@ void Engine::Initialize() {
     running = true;
 
     lastTick = SDL_GetPerformanceCounter();
+    for (int i = 0; i < 4; i++) {
+        blocks[i] = new Block();
+        blocks[i]->x_pos = first_x;
+        first_x += 50;
+        blocks[i]->y_pos = 400;
+    }
 }
 
 
@@ -47,8 +53,20 @@ void Engine::Main() {
     cloud->draw(renderer);
     player->update(deltaTime);
     player->draw(renderer, Color{255, 0, 0, 255});
-    block->update(deltaTime);
-    block->draw(renderer, Color{0, 255, 0, 255}, 200, 500);
+
+    // block->update(deltaTime);
+    // block->draw(renderer, Color{0, 255, 0, 255}, 200, 500);
+
+
+
+    for (int i = 0; i < 4; i++) {
+
+
+
+        blocks[i]->update(deltaTime);
+        blocks[i]->draw(renderer, Color{0, 255, 0, 255}, blocks[i]->x_pos, blocks[i]->y_pos);
+    }
+
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_Rect r{0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 200};

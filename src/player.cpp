@@ -16,27 +16,31 @@ void Player::update(float dt) {
     }
     x += velocityx * dt;
     y += velocity * dt;
+    for (int i = 0; i < 4; i++) {
 
-    if ((x + width >= engine->block->x_pos && x + width < engine->block->x_pos + 5) && (y + height > engine->block->y_pos && y < engine->block->y_pos + 50)) {
-        velocityx = 0; // simple collision with blocks
-        x = engine->block->x_pos - width;
-    }
 
-    if ((x < engine->block->x_pos + 50 && x > engine->block->x_pos + 45) && (y + height > engine->block->y_pos && y < engine->block->y_pos + 50)) {
-        velocityx = 0; // simple collision with blocks
-        x = engine->block->x_pos + 50;
-    }
 
-    if (x + width > engine->block->x_pos && x < engine->block->x_pos + 50 && y < engine->block->y_pos + 50 && y > engine->block->y_pos + 45) {
-        floor = true;
-        y = engine->block->y_pos + 50;
-        velocity = 0;
-    }
-    if (engine->block->x_pos < x + width && engine->block->x_pos + 50 > x && engine->block->y_pos < y + height && engine->block->y_pos + 5 > y + height) {
-        floor = true;
-        air = false;
-        y = engine->block->y_pos - height;
-        velocity = 0;
+        if ((x + width >= engine->blocks[i]->x_pos && x + width < engine->blocks[i]->x_pos + 5) && (y + height > engine->blocks[i]->y_pos && y < engine->blocks[i]->y_pos + 50)) {
+            velocityx = 0; // simple collision with blocks
+            x = engine->blocks[i]->x_pos - width;
+        }
+
+        if ((x < engine->blocks[i]->x_pos + 50 && x > engine->blocks[i]->x_pos + 45) && (y + height + 2 > engine->blocks[i]->y_pos && y < engine->blocks[i]->y_pos + 50)) {
+            velocityx = 0; // simple collision with blocks
+            x = engine->blocks[i]->x_pos + 50;
+        }
+
+        if (x + width > engine->blocks[i]->x_pos && x < engine->blocks[i]->x_pos + 50 && y < engine->blocks[i]->y_pos + 50 && y > engine->blocks[i]->y_pos + 45) {
+            floor = true;
+            y = engine->blocks[i]->y_pos + 50;
+            velocity = 0;
+        }
+        if (engine->blocks[i]->x_pos < x + width && engine->blocks[i]->x_pos + 50 > x && engine->blocks[i]->y_pos < y + height && engine->blocks[i]->y_pos + 5 > y + height) {
+            floor = true;
+            air = false;
+            y = engine->blocks[i]->y_pos - height;
+            velocity = 0;
+        }
     }
 }
 void Player::move(int smer, float dt) {
