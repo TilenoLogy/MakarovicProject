@@ -8,11 +8,6 @@ void Player::update(float dt) {
         velocity += dt * gravity;
         floor = false;
         // std::cout << (dt * gravity);
-    } else if ((y + height >= 620) && (floor == false)) {
-        floor = true;
-        y = 620 - height;
-        velocity = 0;
-        air = false;
     }
     x += velocityx * dt;
     for (int i = 0; i < 10; i++) {

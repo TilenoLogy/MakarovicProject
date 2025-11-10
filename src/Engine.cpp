@@ -20,7 +20,7 @@ void Engine::Initialize() {
         blocks[i] = new Block();
         blocks[i]->x_pos = first_x;
         first_x += 50;
-        blocks[i]->y_pos = 400;
+        blocks[i]->y_pos = 600;
     }
 }
 
@@ -68,9 +68,9 @@ void Engine::Main() {
     }
 
 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_Rect r{0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 200};
-    SDL_RenderFillRect(renderer, &r);
+    // SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    // SDL_Rect r{0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 200};
+    // SDL_RenderFillRect(renderer, &r);
 
     SDL_RenderPresent(renderer);
 }
