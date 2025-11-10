@@ -19,6 +19,8 @@ public:
     bool first_time = true;
     int first_x = 50;
 
+    int mouse_x = 0;
+    int mouse_y = 0;
 
 protected:
     Player* player;

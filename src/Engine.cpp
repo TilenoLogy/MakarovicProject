@@ -38,6 +38,7 @@ void Engine::Main() {
         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) running = false;
         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) player->jump(deltaTime);
     }
+    SDL_GetMouseState(&mouse_x, &mouse_y);
 
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
