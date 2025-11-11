@@ -16,10 +16,11 @@ public:
     bool running;
 
     static const int num_of_cubes = 20;
-    Block* blocks[num_of_cubes];
+    Block* blocks[num_of_cubes][2];
     Block* block;
-    bool first_time = true;
+
     int first_x = 50;
+    int first_y = 550;
 
     int mouse_x = 0;
     int mouse_y = 0;

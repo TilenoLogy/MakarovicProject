@@ -19,13 +19,13 @@ protected:
     float y = 100;
     int width = 50;
     int height = 50;
-    Color col;
     bool air;
     float velocity = 0.0f;
     float velocityx = 0.0f;
     float maxvelocityx = 250.0f;
     bool floor = false;
     float kt = 1.0f; // koeficient trenja
+    bool is_colliding = false;
 
 public:
     // Player(Engine* enginePtr) : engine(enginePtr) {}

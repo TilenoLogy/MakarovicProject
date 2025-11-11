@@ -8,10 +8,7 @@
 int WinMain() {
     Engine* CEngine = new Engine();
 
-    // Block* block = new Block();
-
     CEngine->Initialize();
-
 
     while (CEngine->running) {
         CEngine->Main();

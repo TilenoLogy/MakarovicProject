@@ -1,13 +1,12 @@
-// INIT,DELETE,UPDATE
 #include <Engine.hpp>
 
 
-// const int Engine::num_of_cubes = 20;
 
 void Engine::Initialize() {
+
     cloud = new Clouds();
-    block = new Block();
-    player = new Player(); // this
+    // block = new Block();
+    player = new Player();
     player->engine = this;
 
     window = CreateWindow();
@@ -16,11 +15,17 @@ void Engine::Initialize() {
     running = true;
 
     lastTick = SDL_GetPerformanceCounter();
-    for (int i = 0; i < num_of_cubes; i++) {
-        blocks[i] = new Block();
-        blocks[i]->x_pos = first_x;
-        first_x += 50;
-        blocks[i]->y_pos = 600;
+
+    for (int j = 0; j < 2; j++) {
+
+        for (int i = 0; i < num_of_cubes; i++) {
+            blocks[i][j] = new Block();
+            blocks[i][j]->x_pos = first_x;
+            first_x += 50;
+            blocks[i][j]->y_pos = first_y;
+        }
+        first_x = 50;
+        first_y += 50;
     }
 }
 
@@ -51,28 +56,18 @@ void Engine::Main() {
 
     SDL_SetRenderDrawColor(renderer, 0, 232, 232, 255);
     SDL_RenderClear(renderer);
-    cloud->draw(renderer);
+    cloud->draw(renderer, Color{255, 255, 255, 255});
     player->update(deltaTime);
     player->draw(renderer, Color{255, 0, 0, 255});
 
-    // block->update(deltaTime);
-    // block->draw(renderer, Color{0, 255, 0, 255}, 200, 500);
 
 
-
-    for (int i = 0; i < num_of_cubes; i++) {
-
-
-
-        blocks[i]->update(deltaTime);
-        blocks[i]->draw(renderer, Color{0, 255, 0, 255}, blocks[i]->x_pos, blocks[i]->y_pos);
+    for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < num_of_cubes; i++) {
+            blocks[i][j]->update(deltaTime);
+            blocks[i][j]->draw(renderer, Color{0, 255, 0, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+        }
     }
-
-
-    // SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    // SDL_Rect r{0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 200};
-    // SDL_RenderFillRect(renderer, &r);
-
     SDL_RenderPresent(renderer);
 }
 
@@ -81,8 +76,12 @@ void Engine::Main() {
 void Engine::Shutdown() {
     delete cloud;
     delete player;
-    delete block;
-
+    // delete block;
+    for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < num_of_cubes; i++) {
+            delete blocks[i][j];
+        }
+    }
 
 
     SDL_DestroyRenderer(renderer);

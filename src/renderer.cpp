@@ -13,7 +13,7 @@ int Initialize() {
 
 SDL_Window* CreateWindow() {
     SDL_Window* window = SDL_CreateWindow(
-        "SDL2 Beginner Example",
+        "TheProject",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         SCREEN_WIDTH, SCREEN_HEIGHT,
         0);
