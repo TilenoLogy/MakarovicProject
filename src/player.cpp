@@ -10,7 +10,7 @@ void Player::update(float dt) {
         // std::cout << (dt * gravity);
     }
     x += velocityx * dt;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < engine->num_of_cubes; i++) {
         Block* blk = engine->blocks[i];
         if (!blk) continue;
 
@@ -44,7 +44,7 @@ void Player::update(float dt) {
 
     y += velocity * dt;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < engine->num_of_cubes; i++) {
 
         auto blk = engine->blocks[i];
         if (!blk) continue;

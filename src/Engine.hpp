@@ -14,13 +14,16 @@ public:
     void Main();
     void Shutdown();
     bool running;
-    Block* blocks[10];
+
+    static const int num_of_cubes = 20;
+    Block* blocks[num_of_cubes];
     Block* block;
     bool first_time = true;
     int first_x = 50;
 
     int mouse_x = 0;
     int mouse_y = 0;
+
 
 protected:
     Player* player;

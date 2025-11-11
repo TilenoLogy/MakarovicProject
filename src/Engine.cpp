@@ -2,9 +2,9 @@
 #include <Engine.hpp>
 
 
+// const int Engine::num_of_cubes = 20;
 
 void Engine::Initialize() {
-
     cloud = new Clouds();
     block = new Block();
     player = new Player(); // this
@@ -16,7 +16,7 @@ void Engine::Initialize() {
     running = true;
 
     lastTick = SDL_GetPerformanceCounter();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < num_of_cubes; i++) {
         blocks[i] = new Block();
         blocks[i]->x_pos = first_x;
         first_x += 50;
@@ -60,7 +60,7 @@ void Engine::Main() {
 
 
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < num_of_cubes; i++) {
 
 
 
