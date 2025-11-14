@@ -63,9 +63,16 @@ void Engine::Main() {
 
 
     for (int j = 0; j < 2; j++) {
-        for (int i = 0; i < num_of_cubes; i++) {
-            blocks[i][j]->update(deltaTime);
-            blocks[i][j]->draw(renderer, Color{0, 255, 0, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+        if (j == 0) {
+            for (int i = 0; i < num_of_cubes; i++) {
+                blocks[i][j]->update(deltaTime);
+                blocks[i][j]->draw(renderer, Color{0, 255, 0, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+            }
+        } else {
+            for (int i = 0; i < num_of_cubes; i++) {
+                blocks[i][j]->update(deltaTime);
+                blocks[i][j]->draw(renderer, Color{79, 44, 19, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+            }
         }
     }
     SDL_RenderPresent(renderer);

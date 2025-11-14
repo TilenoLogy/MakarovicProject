@@ -13,6 +13,9 @@ void Player::update(float dt) {
     //         break;
     //     }
     // }
+    // if (velocity > 0.0f) air = true;
+
+
     if (!is_colliding) {
         velocity += dt * gravity;
         floor = false;
@@ -70,6 +73,8 @@ void Player::update(float dt) {
             float by1 = blk->y_pos;
             float by2 = blk->y_pos + 50.0f;
 
+
+
             if (px2 > bx1 && px1 < bx2 && py2 > by1 && py1 < by2) {
                 float overlapTop = py2 - by1;    // penetration from above (player landed on block)
                 float overlapBottom = by2 - py1; // penetration from below (hit block ceiling)
@@ -85,6 +90,8 @@ void Player::update(float dt) {
                     y += overlapBottom;
                     velocity = 0.0f;
                 }
+            } else {
+                is_colliding = false;
             }
         }
     }
