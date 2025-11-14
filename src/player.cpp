@@ -111,11 +111,11 @@ void Player::move(int smer, float dt) {
 void Player::jump(float dt) {
 
     is_colliding = false;
-    if (!air) {
+    if (floor) {
 
         velocity += -500;
 
-        air = true;
+        floor = false;
     }
 }
 
