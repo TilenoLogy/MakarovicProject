@@ -1,6 +1,6 @@
 #include <block.hpp>
 
-void Block::draw(SDL_Renderer* renderer, Color color, int x, int y) {
+void Block::draw(SDL_Renderer* renderer, int x, int y) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_Rect r{x, y, 50, 50};
     SDL_RenderFillRect(renderer, &r);

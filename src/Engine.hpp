@@ -6,6 +6,7 @@
 #include "player.hpp"
 #include "renderer.hpp"
 #include <SDL.h>
+#include <vector>
 
 
 class Engine {
@@ -16,7 +17,8 @@ public:
     bool running;
 
     static const int num_of_cubes = 20;
-    Block* blocks[num_of_cubes][2];
+
+    std::vector<Block*> blocks;
     Block* block;
 
     int first_x = 50;

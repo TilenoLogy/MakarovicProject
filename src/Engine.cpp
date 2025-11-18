@@ -16,14 +16,17 @@ void Engine::Initialize() {
 
     lastTick = SDL_GetPerformanceCounter();
 
+    int start_i = 0;
     for (int j = 0; j < 2; j++) {
 
-        for (int i = 0; i < num_of_cubes; i++) {
-            blocks[i][j] = new Block();
-            blocks[i][j]->x_pos = first_x;
+        for (int i = start_i; i < num_of_cubes + start_i; i++) {
+            blocks.push_back(new Block());
+            blocks[i]->color = (j == 0) ? Color{0, 255, 0, 255} : Color{79, 44, 19, 255};
+            blocks[i]->x_pos = first_x;
             first_x += 50;
-            blocks[i][j]->y_pos = first_y;
+            blocks[i]->y_pos = first_y;
         }
+        start_i += num_of_cubes;
         first_x = 50;
         first_y += 50;
     }
@@ -61,17 +64,17 @@ void Engine::Main() {
     player->draw(renderer, Color{255, 0, 0, 255});
 
 
-
     for (int j = 0; j < 2; j++) {
         if (j == 0) {
+
             for (int i = 0; i < num_of_cubes; i++) {
-                blocks[i][j]->update(deltaTime);
-                blocks[i][j]->draw(renderer, Color{0, 255, 0, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+                blocks[i]->update(deltaTime);
+                blocks[i]->draw(renderer, blocks[i]->x_pos, blocks[i]->y_pos);
             }
         } else {
-            for (int i = 0; i < num_of_cubes; i++) {
-                blocks[i][j]->update(deltaTime);
-                blocks[i][j]->draw(renderer, Color{79, 44, 19, 255}, blocks[i][j]->x_pos, blocks[i][j]->y_pos);
+            for (int i = 0; i < blocks.size(); i++) {
+                blocks[i]->update(deltaTime);
+                blocks[i]->draw(renderer, blocks[i]->x_pos, blocks[i]->y_pos);
             }
         }
     }
@@ -84,10 +87,9 @@ void Engine::Shutdown() {
     delete cloud;
     delete player;
     // delete block;
-    for (int j = 0; j < 2; j++) {
-        for (int i = 0; i < num_of_cubes; i++) {
-            delete blocks[i][j];
-        }
+
+    for (int i = 0; i < num_of_cubes * 2; i++) {
+        delete blocks[i];
     }
 
 
