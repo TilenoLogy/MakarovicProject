@@ -15,10 +15,9 @@ void Player::update(float dt) {
     // }
     // if (velocity > 0.0f) air = true;
 
-
-    if (!is_colliding) {
+    std::cout << floor << "  " << velocity << "\n";
+    if (!floor) {
         velocity += dt * gravity;
-        floor = false;
     }
 
     x += velocityx * dt;
@@ -57,6 +56,8 @@ void Player::update(float dt) {
         }
     }
     y += velocity * dt;
+    is_colliding = false;
+    floor = false;
 
     for (int j = 0; j < 2; j++) {
         for (int i = 0; i < engine->num_of_cubes; i++) {
@@ -75,7 +76,7 @@ void Player::update(float dt) {
 
 
 
-            if (px2 > bx1 && px1 < bx2 && py2 > by1 && py1 < by2) {
+            if (px2 > bx1 && px1 < bx2 && py2 + 2 > by1 && py1 < by2) {
                 float overlapTop = py2 - by1;    // penetration from above (player landed on block)
                 float overlapBottom = by2 - py1; // penetration from below (hit block ceiling)
                 is_colliding = true;
@@ -84,15 +85,19 @@ void Player::update(float dt) {
                     y -= overlapTop;
                     velocity = 0.0f;
                     floor = true;
-                    air = false;
+
                 } else {
                     // hit block from below
                     y += overlapBottom;
                     velocity = 0.0f;
                 }
-            } else {
-                is_colliding = false;
             }
+
+            if (abs(velocity) < 0.5f) velocity = 0.0f;
+
+            // else {
+            //     is_colliding = false;
+            // }
         }
     }
 }
@@ -110,12 +115,10 @@ void Player::move(int smer, float dt) {
 
 void Player::jump(float dt) {
 
-    is_colliding = false;
+
     if (floor) {
 
         velocity += -500;
-
-        floor = false;
     }
 }
 

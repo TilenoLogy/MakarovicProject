@@ -19,7 +19,6 @@ protected:
     float y = 100;
     int width = 50;
     int height = 50;
-    bool air;
     float velocity = 0.0f;
     float velocityx = 0.0f;
     float maxvelocityx = 250.0f;
