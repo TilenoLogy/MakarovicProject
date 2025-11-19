@@ -1,6 +1,20 @@
 #include <Engine.hpp>
 
 
+void Engine::Break() {
+    SDL_GetMouseState(&mouse_x, &mouse_y);
+
+    for (int i = 0; i < blocks.size(); i++) {
+        if (mouse_x >= blocks[i]->x_pos && mouse_x <= blocks[i]->x_pos + 50 && mouse_y >= blocks[i]->y_pos && mouse_y <= blocks[i]->y_pos + 50) {
+
+            blocks.erase(blocks.begin() + i);
+            break;
+            //-------------------------------------------------------
+        }
+    }
+}
+
+
 
 void Engine::Initialize() {
 
@@ -45,8 +59,9 @@ void Engine::Main() {
         if (e.type == SDL_QUIT) running = false;
         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) running = false;
         if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) player->jump(deltaTime);
+        if (e.type == SDL_MOUSEBUTTONDOWN) Break();
     }
-    SDL_GetMouseState(&mouse_x, &mouse_y);
+    // SDL_GetMouseState(&mouse_x, &mouse_y);
 
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
@@ -88,7 +103,7 @@ void Engine::Shutdown() {
     delete player;
     // delete block;
 
-    for (int i = 0; i < num_of_cubes * 2; i++) {
+    for (int i = 0; i < blocks.size(); i++) {
         delete blocks[i];
     }
 

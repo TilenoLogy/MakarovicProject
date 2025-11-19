@@ -14,6 +14,7 @@ public:
     void Initialize();
     void Main();
     void Shutdown();
+    void Break();
     bool running;
 
     static const int num_of_cubes = 20;

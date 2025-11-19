@@ -23,7 +23,7 @@ void Player::update(float dt) {
     x += velocityx * dt;
 
 
-    for (int i = 0; i < engine->num_of_cubes * 2; i++) {
+    for (int i = 0; i < engine->blocks.size(); i++) {
         Block* blk = engine->blocks[i];
         if (!blk) continue;
 
@@ -60,7 +60,7 @@ void Player::update(float dt) {
     floor = false;
 
 
-    for (int i = 0; i < engine->num_of_cubes; i++) {
+    for (int i = 0; i < engine->blocks.size(); i++) {
 
         auto blk = engine->blocks[i];
         if (!blk) continue;
